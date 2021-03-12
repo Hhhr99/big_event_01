@@ -11,4 +11,23 @@ $(function () {
         $('.login-box').show();
         $('.reg-box').hide();
     })
+
+    // 3.自定义验证规则
+    const form = layui.form;
+    form.verify({
+        //密码规则
+        pwd: [
+            /^[\S]{6,16}$/,
+            "密码必须为6-16位，且不能输入空格"
+        ],
+        // 确认密码规则
+        repwd: function (value) {
+            // 选择器必须带空格，选择的是后代中的input,name属性值为password的哪一个标签
+            const pwd = $('.reg-box input[name=password]').val();
+            // 比较
+            if (value !== pwd) {
+                return "两次输入的密码不一样";
+            }
+        }
+    });
 })
