@@ -30,4 +30,53 @@ $(function () {
             }
         }
     });
+
+    // 4.注册功能
+    $('#form_reg').on('submit', function (e) {
+        //阻止跳转
+        e.preventDefault();
+        //发送ajax
+        $.ajax({
+            type: 'POST',
+            url: '/api/reguser',
+            data: {
+                username: $('.reg-box [name=username]').val(),
+                password: $('.reg-box [name=password]').val(),
+            },
+            success: (res) => {
+                console.log(res);
+                if (res.status !== 0) {
+                    return layer.msg(res.message, {icon: 5});
+                }
+                layer.msg('恭喜,您注册成功！', {icon: 6});
+                //跳转登录页
+                $('#link_login').click();
+                //清空注册输入框
+                $('#form_reg')[0].reset();
+            }
+        })
+
+    })
+
+    // 5.登录功能
+    $('#form_login').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/api/login',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: (res) => {
+                console.log(res);
+                if (res.status !== 0) {
+                    return layer.msg(res.message, {icon: 5});
+                }
+                layer.msg('恭喜,登录成功！', {icon: 6});
+                //储存本地 以后用
+                localStorage.setItem('token', res.token);
+                //跳转页面
+                location.href = '/code/index.html';
+            }
+        })
+
+    })
 })
