@@ -12,10 +12,11 @@ $.ajaxPrefilter(function (options) {
     options.url = baseURL + options.url;
 
 
+
     // 2.身份认证
     if (options.url.indexOf('/my/') > -1) {
         options.headers = {
             Authorization: localStorage.getItem('token') || ''
         }
     }
-})
+}
