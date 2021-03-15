@@ -10,9 +10,9 @@ function getUserInfo() {
     $.ajax({
         url: '/my/userinfo',
         //配置头信息，设置token，身份识别认证！
-        headers: {
-            Authorization: localStorage.getItem('token') || '',
-        },
+        // headers: {
+        //     Authorization: localStorage.getItem('token') || '',
+        // },
         success: (res) => {
             console.log(res)
 
