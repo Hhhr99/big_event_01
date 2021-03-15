@@ -3,6 +3,13 @@ $(function () {
     // 这个功能，后面其它的页面/模块还要用，所以必须设置为全局函数
     getUserInfo();
 
+    // 2.退出
+    let layer = layui.layer;
+    layer.confirm('是否确认退出？', {icon: 3, title: '提示'}, function (index) {
+        localStorage.removeItem('token');
+        location.href = '/login.html';
+        layer.close(index);
+    })
 });
 
 //必须保证这个函数是全局的，后面其它功能要用
